@@ -1,6 +1,7 @@
 import { useState } from "react";
 import GameBoard from "./components/Gameboard";
 import Player from "./components/Player";
+import Log from "./components/Log";
 
 function App() {
   const [gameTurns, setGameTurns] = useState([]);
@@ -23,9 +24,10 @@ function App() {
       }
 
       const updatedTurns = [
-        { sqaure: { row: rowIndex, col: colIndex }, player: currentPlayer },
+        { square: { row: rowIndex, col: colIndex }, player: currentPlayer },
         ...prevTurns,
       ];
+      console.log(`turns: ${updatedTurns[0].square.row}`);
       return updatedTurns;
     });
   };
@@ -39,6 +41,7 @@ function App() {
         </ol>
         <GameBoard onSelect={handlePlayerSelect} turns={gameTurns} />
       </div>
+      <Log turns={gameTurns} />
     </main>
   );
 }

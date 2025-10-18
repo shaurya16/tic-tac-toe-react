@@ -9,8 +9,8 @@ export default function GameBoard({ onSelect, turns }) {
   let gameBoard = initiaGamelBoard;
 
   for (const turn of turns) {
-    const { sqaure, player } = turn;
-    const { row, col } = sqaure;
+    const { square, player } = turn;
+    const { row, col } = square;
     gameBoard[row][col] = player;
   }
 
