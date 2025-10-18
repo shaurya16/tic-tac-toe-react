@@ -5,22 +5,14 @@ const initiaGamelBoard = [
   [null, null, null],
 ];
 
-export default function GameBoard({ symbol, onSelect }) {
-  const [gameBoard, setGameBoard] = useState(initiaGamelBoard);
+export default function GameBoard({ onSelect, turns }) {
+  let gameBoard = initiaGamelBoard;
 
-  const handleSelectButton = (rowIndex, colIndex) => {
-    setGameBoard((prevGameBoard) => {
-      const updatedBoard = [
-        ...prevGameBoard.map((innerArray) => [...innerArray]),
-      ];
-      if (updatedBoard[rowIndex][colIndex] === null) {
-        updatedBoard[rowIndex][colIndex] = symbol;
-      }
-      return updatedBoard;
-    });
-
-    onSelect();
-  };
+  for (const turn of turns) {
+    const { sqaure, player } = turn;
+    const { row, col } = sqaure;
+    gameBoard[row][col] = player;
+  }
 
   return (
     <ol id="game-board">
@@ -29,7 +21,7 @@ export default function GameBoard({ symbol, onSelect }) {
           <ol>
             {row.map((playerSymbol, colIndex) => (
               <li key={colIndex}>
-                <button onClick={() => handleSelectButton(rowIndex, colIndex)}>
+                <button onClick={() => onSelect(rowIndex, colIndex)}>
                   {playerSymbol}
                 </button>
               </li>
